@@ -10,7 +10,7 @@ const Login = props => {
     
     const login = e => {
         e.preventDefault();
-        axiosWithAuth().post('http://localhost:5000/api/login', credentials)
+        axiosWithAuth().post('/login', credentials)
             .then(res => {
                 localStorage.setItem('token', res.data.payload);
                 props.history.push('/protected');
@@ -19,7 +19,6 @@ const Login = props => {
     }
 
     const handleChange = e => {
-        console.log(credentials);
         setCredentials({
             ...credentials,
             [e.target.name]: e.target.value
@@ -30,8 +29,8 @@ const Login = props => {
         <div>
             <h1>Login Page</h1>
             <form onSubmit={login}>
-                <input type="text" name="username" value={credentials.username} onChange={handleChange} />
-                <input type="password" name="password" value={credentials.password} onChange={handleChange} />
+                <input type="text" name="username" value={credentials.username} onChange={handleChange} placeholder="Username" />
+                <input type="password" name="password" value={credentials.password} onChange={handleChange} placeholder="Password" />
                 <button>Log In</button>
             </form>
         </div>
