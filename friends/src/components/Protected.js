@@ -31,6 +31,14 @@ const Protected = () => {
         setUpdate(true);
     }
 
+    const removeFriend = id => {
+        axiosWithAuth()
+            .delete(`friends/${id}`)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+        setUpdate(true);
+    }
+
     const handleChange = e => {
         e.target.name === 'age' ? 
         setToAdd({ ...toAdd, [e.target.name]: parseInt(e.target.value, 10) }) : 
@@ -47,7 +55,7 @@ const Protected = () => {
                 <button>Add Friend</button>
             </form>
             {friends.map(friend => (
-                <Friend key={friend.id} friend={friend} />
+                <Friend key={friend.id} friend={friend} remove={removeFriend} />
             ))}
         </div>
     )
